@@ -16,7 +16,7 @@ class Bahanbaku extends Model
     //dari beberapa resep
     public function reseps()
     {
-        return $this->belongsTo(Resep::class);
+        return $this->belongsToMany(Resep::class);
     }
 
 }

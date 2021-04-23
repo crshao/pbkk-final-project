@@ -16,6 +16,10 @@ class CreateResepsTable extends Migration
         Schema::create('reseps', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');
+            $table->string('description');
+            $table->string('jenis');
+            $table->string('gambar')->nullable();
         });
     }
 

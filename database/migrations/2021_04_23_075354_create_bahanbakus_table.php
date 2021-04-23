@@ -16,6 +16,12 @@ class CreateBahanbakusTable extends Migration
         Schema::create('bahanbakus', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');
+            $table->mediumText('description', 1000);
+            $table->string('pricetag');
+            $table->integer('price');
+            $table->string('jenis');
+            $table->string('gambar')->nullable();
         });
     }
 
