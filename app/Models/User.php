@@ -44,14 +44,14 @@ class User extends Authenticatable
     public function roles()
     {
         return $this
-            ->belongsToMany('App\Role')
+            ->belongsToMany(Role::class, 'role_user')
             ->withTimestamps();
     }
 
     public function users()
     {
         return $this
-            ->belongsToMany('App\User')
+            ->belongsToMany(User::class, 'role_user')
             ->withTimestamps();
     }
 
@@ -81,7 +81,7 @@ class User extends Authenticatable
 
     public function hasRole($role)
     {
-      if ($this->roles()->where(‘name’, $role)->first()) {
+      if ($this->roles()->where('name', $role)->first()) {
         return true;
       }
       return false;
