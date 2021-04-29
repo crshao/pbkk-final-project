@@ -28,6 +28,8 @@ Route::get('/beranda', [BuyerSellerController::class, 'index']);
 
 //Bahan Baku
 Route::get('/bahanbaku', [BahanbakuController::class, 'index']);
+Route::get('/bahanbaku/create', [BahanbakuController::class, 'create']);
+Route::post('/bahanbaku', [BahanbakuController::class, 'store']);
 
 Route::get('/buyer', [BuyerController::class, 'index']);
 Route::get('/seller', [SellerController::class, 'index']);
