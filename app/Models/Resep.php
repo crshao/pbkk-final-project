@@ -10,6 +10,7 @@ class Resep extends Model
     use HasFactory;
 
     protected $table = 'reseps';
+    protected $guarded = [];
     
     //Artinya satu resep punya banyak bahan baku
     public function bahanbakus()

@@ -5,6 +5,7 @@ use App\Http\Controllers\BahanbakuController;
 use App\Http\Controllers\BuyerSellerController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\ResepController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,7 @@ Route::post('/bahanbaku', [BahanbakuController::class, 'store']);
 Route::get('/buyer', [BuyerController::class, 'index']);
 Route::get('/seller', [SellerController::class, 'index']);
 
+Route::get('/resep', [ResepController::class, 'index']);
+Route::get('/resep/tambah', [ResepController::class, 'create']);
+Route::post('/resep/tambah', [ResepController::class, 'store']);
+Route::get('/resep/hapus/{id}', [ResepController::class, 'destroy']);

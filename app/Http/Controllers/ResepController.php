@@ -14,7 +14,9 @@ class ResepController extends Controller
      */
     public function index()
     {
-        //
+        $reseps = Resep::all();
+        
+        return view('resep.index', compact('reseps'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ResepController extends Controller
      */
     public function create()
     {
-        //
+        return view('resep.tambah');
     }
 
     /**
@@ -35,7 +37,19 @@ class ResepController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'jenis' => 'required'
+        ]);
+
+        Resep::create([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'jenis' => $data['jenis']
+        ]);
+
+        return redirect('/resep');
     }
 
     /**
@@ -78,8 +92,11 @@ class ResepController extends Controller
      * @param  \App\Models\Resep  $resep
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Resep $resep)
+    public function destroy($id)
     {
-        //
+        $resep = Resep::find($id);
+        $resep->delete();
+
+        return redirect('/resep')->with('success', 'Resep dihapus!');
     }
 }
