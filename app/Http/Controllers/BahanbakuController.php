@@ -14,7 +14,9 @@ class BahanbakuController extends Controller
      */
     public function index()
     {
-        //
+        $bahanBakus = Bahanbaku::all();
+
+        return view('bahanbaku.index', compact('bahanBakus'));
     }
 
     /**
