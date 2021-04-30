@@ -77,7 +77,7 @@ class ResepController extends Controller
      */
     public function edit(Resep $resep)
     {
-        //
+        return view('resep.edit', compact('resep'));
     }
 
     /**
@@ -89,7 +89,15 @@ class ResepController extends Controller
      */
     public function update(Request $request, Resep $resep)
     {
-        //
+        $data = request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'jenis' => 'required',
+        ]);
+
+        $resep->update($request->all());
+
+        return redirect('/resep')->with('success', 'Resep diupdate!');
     }
 
     /**

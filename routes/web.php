@@ -40,3 +40,5 @@ Route::get('/resep/tambah', [ResepController::class, 'create']);
 Route::post('/resep/tambah', [ResepController::class, 'store']);
 Route::get('/resep/hapus/{id}', [ResepController::class, 'destroy']);
 Route::get('/resep/lihat/{id}', [ResepController::class, 'show']);
+Route::get('/resep/edit/{resep}', [ResepController::class, 'edit']);
+Route::post('/resep/edit/{resep}', [ResepController::class, 'update']);
