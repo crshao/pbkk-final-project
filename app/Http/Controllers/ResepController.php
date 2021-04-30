@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Resep;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ResepController extends Controller
 {
@@ -40,13 +41,17 @@ class ResepController extends Controller
         $data = request()->validate([
             'name' => 'required',
             'description' => 'required',
-            'jenis' => 'required'
+            'jenis' => 'required',
+            'gambar' => 'required|image'
         ]);
+
+        $imagePath = $request->gambar->store('uploads', 'public');
 
         Resep::create([
             'name' => $data['name'],
             'description' => $data['description'],
-            'jenis' => $data['jenis']
+            'jenis' => $data['jenis'],
+            'gambar' => $imagePath,
         ]);
 
         return redirect('/resep');
@@ -58,9 +63,10 @@ class ResepController extends Controller
      * @param  \App\Models\Resep  $resep
      * @return \Illuminate\Http\Response
      */
-    public function show(Resep $resep)
+    public function show($id)
     {
-        //
+        $resep = Resep::find($id);
+        return view('resep.lihat', ['reseps' => $resep]);
     }
 
     /**
@@ -95,6 +101,19 @@ class ResepController extends Controller
     public function destroy($id)
     {
         $resep = Resep::find($id);
+
+        //dd($resep['gambar']);
+
+        if(Storage::exists('public/'.$resep['gambar'])){
+
+            Storage::delete('public/'.$resep['gambar']);
+
+        }else{
+
+            dd('File does not exists.');
+
+        }
+
         $resep->delete();
 
         return redirect('/resep')->with('success', 'Resep dihapus!');

@@ -39,3 +39,4 @@ Route::get('/resep', [ResepController::class, 'index']);
 Route::get('/resep/tambah', [ResepController::class, 'create']);
 Route::post('/resep/tambah', [ResepController::class, 'store']);
 Route::get('/resep/hapus/{id}', [ResepController::class, 'destroy']);
+Route::get('/resep/lihat/{id}', [ResepController::class, 'show']);
