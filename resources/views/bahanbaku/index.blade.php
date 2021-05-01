@@ -4,6 +4,13 @@
     Bahan Baku
 @endsection
 
+{{-- Untuk menghilangkan tanda panah besar --}}
+<style>
+  .w-5 {
+    display: none
+  }
+</style>
+
 @section('content')
   @foreach($bahanBakus->chunk(3) as $bahanBakuChunk)
     <div class="card-deck">
@@ -23,4 +30,8 @@
       @endforeach
     </div>
   @endforeach
+
+  <span>
+    {{ $bahanBakus->links()}}
+  </span>
 @endsection
