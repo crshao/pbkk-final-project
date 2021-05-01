@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -14,7 +16,22 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::check())
+        {
+            // $carts = Cart::where('id_user', Auth::id())->get();
+            // return view('cart.index', compact('carts'));
+
+            $carts = DB::table('carts')
+            ->join('users', 'users.id', '=', 'carts.id_user')
+            ->join('bahanbakus', 'bahanbakus.id', '=', 'carts.id_bahanbaku')
+            ->where('id_user', Auth::id())
+            ->get();
+
+            return view('cart.index', ['carts' => $carts]);
+        }else{
+            return "please login";
+        }
+
     }
 
     /**
