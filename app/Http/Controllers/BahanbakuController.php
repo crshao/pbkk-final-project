@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bahanbaku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BahanbakuController extends Controller
 {
@@ -66,9 +67,10 @@ class BahanbakuController extends Controller
      * @param  \App\Models\Bahanbaku  $bahanbaku
      * @return \Illuminate\Http\Response
      */
-    public function show(Bahanbaku $bahanbaku)
+    public function show($id)
     {
-        //
+        $bahanBaku = Bahanbaku::find($id);
+        return view('bahanbaku.lihat', ['bahanbakus' => $bahanBaku]);
     }
 
     /**
@@ -79,7 +81,7 @@ class BahanbakuController extends Controller
      */
     public function edit(Bahanbaku $bahanbaku)
     {
-        //
+        return view('bahanbaku.edit', compact('bahanbaku'));
     }
 
     /**
@@ -91,7 +93,15 @@ class BahanbakuController extends Controller
      */
     public function update(Request $request, Bahanbaku $bahanbaku)
     {
-        //
+        $data = request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'jenis' => 'required',
+        ]);
+
+        $bahanbaku->update($request->all());
+
+        return redirect('/bahanbaku')->with('success', 'Bahan Baku telah diupdate.');
     }
 
     /**
@@ -100,8 +110,20 @@ class BahanbakuController extends Controller
      * @param  \App\Models\Bahanbaku  $bahanbaku
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bahanbaku $bahanbaku)
+    public function destroy($id)
     {
-        //
+        $bahanbaku = Bahanbaku::find($id);
+
+        //dd($bahanbaku['gambar']);
+
+        // if(Storage::exists('public/'.$bahanbaku['gambar'])){
+        //     Storage::delete('public/'.$bahanbaku['gambar']);
+        // }else{
+        //     dd('File does not exists.');
+        // }
+
+        $bahanbaku->delete();
+
+        return redirect('/bahanbaku')->with('success', 'Bahan Baku dihapus');
     }
 }

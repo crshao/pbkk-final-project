@@ -32,6 +32,10 @@ Route::get('/beranda', [BuyerSellerController::class, 'index']);
 Route::get('/bahanbaku', [BahanbakuController::class, 'index']);
 Route::get('/bahanbaku/create', [BahanbakuController::class, 'create']);
 Route::post('/bahanbaku', [BahanbakuController::class, 'store']);
+Route::get('/bahanbaku/hapus/{id}', [BahanbakuController::class, 'destroy']);
+Route::get('/bahanbaku/lihat/{id}', [BahanbakuController::class, 'show']);
+Route::get('/bahanbaku/edit/{bahanbaku}', [BahanbakuController::class, 'edit']);
+Route::post('/bahanbaku/edit/{bahanbaku}', [BahanbakuController::class, 'update']);
 
 Route::get('/buyer', [BuyerController::class, 'index']);
 Route::get('/seller', [SellerController::class, 'index']);
