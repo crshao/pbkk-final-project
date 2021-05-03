@@ -52,3 +52,5 @@ Route::get('/cart', [CartController::class, 'index']);
 Route::post('/cart/add', [CartController::class, 'store']);
 Route::get('/cart/update', [CartController::class, 'update']);
 Route::get('/cart/remove', [CartController::class, 'destroy']);
+
+Route::get('/user', [App\Http\Controllers\UserController::class, 'show'])->name('user');
