@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Auth\Input;
 
 class RegisterController extends Controller
 {
@@ -64,10 +66,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        // dd($data);
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $userId = $user->id;
+        $roleId = $data['role']; // Ntar rolenya, if buyer maka 2, elif seller maka 1 ?
+        // dd($roleId);
+
+        DB::table('role_user')->insert([
+            'role_id' => $roleId,
+            'user_id' => $userId,
+        ]);
+
+        return $user;
     }
 }
