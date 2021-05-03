@@ -44,8 +44,8 @@
 
                             <div class="col-md-6">
                                 <br><br><select>
-                                    <option value= Seller> Buyer </option>
-                                    <option value= Buyer> Seller </option>
+                                    <option value=2> Buyer </option>
+                                    <option value=1> Seller </option>
                                 </select><br><br>
                             </div>
                         </div>
