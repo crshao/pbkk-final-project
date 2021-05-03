@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Resep;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ResepController extends Controller
 {
@@ -14,7 +15,9 @@ class ResepController extends Controller
      */
     public function index()
     {
-        //
+        $reseps = Resep::all();
+        
+        return view('resep.index', compact('reseps'));
     }
 
     /**
@@ -24,7 +27,7 @@ class ResepController extends Controller
      */
     public function create()
     {
-        //
+        return view('resep.tambah');
     }
 
     /**
@@ -35,7 +38,23 @@ class ResepController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'jenis' => 'required',
+            'gambar' => 'required|image'
+        ]);
+
+        $imagePath = $request->gambar->store('uploads', 'public');
+
+        Resep::create([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'jenis' => $data['jenis'],
+            'gambar' => $imagePath,
+        ]);
+
+        return redirect('/resep');
     }
 
     /**
@@ -44,9 +63,10 @@ class ResepController extends Controller
      * @param  \App\Models\Resep  $resep
      * @return \Illuminate\Http\Response
      */
-    public function show(Resep $resep)
+    public function show($id)
     {
-        //
+        $resep = Resep::find($id);
+        return view('resep.lihat', ['reseps' => $resep]);
     }
 
     /**
@@ -57,7 +77,7 @@ class ResepController extends Controller
      */
     public function edit(Resep $resep)
     {
-        //
+        return view('resep.edit', compact('resep'));
     }
 
     /**
@@ -69,7 +89,15 @@ class ResepController extends Controller
      */
     public function update(Request $request, Resep $resep)
     {
-        //
+        $data = request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'jenis' => 'required',
+        ]);
+
+        $resep->update($request->all());
+
+        return redirect('/resep')->with('success', 'Resep diupdate!');
     }
 
     /**
@@ -78,8 +106,24 @@ class ResepController extends Controller
      * @param  \App\Models\Resep  $resep
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Resep $resep)
+    public function destroy($id)
     {
-        //
+        $resep = Resep::find($id);
+
+        //dd($resep['gambar']);
+
+        if(Storage::exists('public/'.$resep['gambar'])){
+
+            Storage::delete('public/'.$resep['gambar']);
+
+        }else{
+
+            dd('File does not exists.');
+
+        }
+
+        $resep->delete();
+
+        return redirect('/resep')->with('success', 'Resep dihapus!');
     }
 }

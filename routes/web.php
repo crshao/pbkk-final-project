@@ -5,6 +5,8 @@ use App\Http\Controllers\BahanbakuController;
 use App\Http\Controllers\BuyerSellerController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\ResepController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +36,15 @@ Route::post('/bahanbaku', [BahanbakuController::class, 'store']);
 Route::get('/buyer', [BuyerController::class, 'index']);
 Route::get('/seller', [SellerController::class, 'index']);
 
+Route::get('/resep', [ResepController::class, 'index'])->name('resep.index');
+Route::get('/resep/tambah', [ResepController::class, 'create']))->name('resep.create');
+Route::post('/resep/tambah', [ResepController::class, 'store']))->name('resep.store');
+Route::get('/resep/hapus/{id}', [ResepController::class, 'destroy']))->name('resep.destroy');
+Route::get('/resep/lihat/{id}', [ResepController::class, 'show']))->name('resep.show');
+Route::get('/resep/edit/{resep}', [ResepController::class, 'edit']))->name('resep.edit');
+Route::post('/resep/edit/{resep}', [ResepController::class, 'update']))->name('resep.update');
+
+Route::get('/cart', [CartController::class, 'index']);
+Route::post('/cart/add', [CartController::class, 'store']);
+Route::get('/cart/update', [CartController::class, 'update']);
+Route::get('/cart/remove', [CartController::class, 'destroy']);
