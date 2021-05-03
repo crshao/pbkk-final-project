@@ -36,13 +36,13 @@ Route::post('/bahanbaku', [BahanbakuController::class, 'store']);
 Route::get('/buyer', [BuyerController::class, 'index']);
 Route::get('/seller', [SellerController::class, 'index']);
 
-Route::get('/resep', [ResepController::class, 'index']);
-Route::get('/resep/tambah', [ResepController::class, 'create']);
-Route::post('/resep/tambah', [ResepController::class, 'store']);
-Route::get('/resep/hapus/{id}', [ResepController::class, 'destroy']);
-Route::get('/resep/lihat/{id}', [ResepController::class, 'show']);
-Route::get('/resep/edit/{resep}', [ResepController::class, 'edit']);
-Route::post('/resep/edit/{resep}', [ResepController::class, 'update']);
+Route::get('/resep', [ResepController::class, 'index'])->name('resep.index');
+Route::get('/resep/tambah', [ResepController::class, 'create']))->name('resep.create');
+Route::post('/resep/tambah', [ResepController::class, 'store']))->name('resep.store');
+Route::get('/resep/hapus/{id}', [ResepController::class, 'destroy']))->name('resep.destroy');
+Route::get('/resep/lihat/{id}', [ResepController::class, 'show']))->name('resep.show');
+Route::get('/resep/edit/{resep}', [ResepController::class, 'edit']))->name('resep.edit');
+Route::post('/resep/edit/{resep}', [ResepController::class, 'update']))->name('resep.update');
 
 Route::get('/cart', [CartController::class, 'index']);
 Route::post('/cart/add', [CartController::class, 'store']);
