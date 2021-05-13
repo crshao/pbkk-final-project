@@ -29,7 +29,7 @@
                 </thead>
                 <tbody>
                 @foreach($users as $user)
-                    @if ($user->role_id == 2)
+                    @if ($user->role_id == 3)
                     <tr>
                     <td>{{$user->name}} </td>
                     <td>{{$user->email}} </td>
