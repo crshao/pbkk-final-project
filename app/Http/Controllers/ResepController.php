@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ResepController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +32,11 @@ class ResepController extends Controller
      */
     public function create()
     {
-        return view('resep.tambah');
+        if (! auth()->user()->hasRole('3')) {
+            abort(401, 'This action is unauthorized.');
+        }else{
+            return view('resep.tambah');
+        }
     }
 
     /**
