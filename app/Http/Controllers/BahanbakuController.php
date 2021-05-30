@@ -54,7 +54,7 @@ class BahanbakuController extends Controller
             'description' => $data['description'],
             'jenis' => $data['jenis'],
             'price' => $data['price'],
-            'pricetag' => 'test',
+            'pricetag' => "Rp." . strval($data['price']) . "/Ons",
             'gambar' => 'storage/' . $imagePath,
         ]);
 
