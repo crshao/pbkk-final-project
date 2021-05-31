@@ -45,7 +45,7 @@
                             <div class="col-md-6">
                                 <select id="role" name="role">
                                     <option value=2> Buyer </option>
-                                    <option value=1> Seller </option>
+                                    <option value=3> Seller </option>
                                 </select><br><br>
                             </div>
                         </div>
