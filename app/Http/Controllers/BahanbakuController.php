@@ -27,7 +27,14 @@ class BahanbakuController extends Controller
      */
     public function create()
     {
-        return view('bahanbaku.create');
+        if(! auth()->user()->hasRole('3'))
+        {
+            abort(401, 'This action is unauthorized.');
+        }
+        else
+        {
+            return view('bahanbaku.create');
+        }
     }
 
     /**
