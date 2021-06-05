@@ -7,6 +7,7 @@ use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ResepController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,6 @@ Route::get('/cart/update', [CartController::class, 'update']);
 Route::get('/cart/remove', [CartController::class, 'destroy']);
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'show'])->name('user');
+
+//Mail
+Route::get('/send/email', [HomeController::class, 'mail']);
