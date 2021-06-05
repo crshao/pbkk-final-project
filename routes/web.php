@@ -9,6 +9,9 @@ use App\Http\Controllers\ResepController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 
+use App\Mail\MailtrapExample;
+use Illuminate\Support\Facades\Mail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,3 +61,8 @@ Route::get('/user', [App\Http\Controllers\UserController::class, 'show'])->name(
 
 //Mail
 Route::get('/send/email', [HomeController::class, 'mail']);
+Route::get('/send-mail', function() {
+    Mail::to('newuser@example.com')->send(new MailtrapExample());
+
+    return "A message has been sent to mailtrap";
+});

@@ -28,8 +28,17 @@ class HomeController extends Controller
 
     public function mail()
     {
-        $name = "test";
-        Mail::to('calvinwijaya.008@gmail.com')->send(new SendMailable($name));
+        $to_name = "test";
+        $to_email = "calvindon08gmail.com"
+        $data = array('name' => "sender name 1", "body" => "test test test");
+
+
+        Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)
+            ->subject("Subject 1");
+
+            $message->from("calvin.wijaya.0000@gmail.com");
+        });
 
         return 'Email sent successfully';
     }
