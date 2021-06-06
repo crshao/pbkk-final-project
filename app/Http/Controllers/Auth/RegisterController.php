@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Auth\Input;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
+
 class RegisterController extends Controller
 {
     /*
@@ -80,6 +83,12 @@ class RegisterController extends Controller
             'role_id' => $roleId,
             'user_id' => $userId,
         ]);
+
+        // dd($user->email);
+        // dd($user->toArray());
+
+        //Send mail
+        Mail::to($user->email)->send(new WelcomeMail());
 
         return $user;
     }

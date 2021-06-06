@@ -26,20 +26,20 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function mail()
-    {
-        $to_name = "test";
-        $to_email = "calvindon08gmail.com"
-        $data = array('name' => "sender name 1", "body" => "test test test");
+    // public function mail()
+    // {
+    //     $to_name = "test";
+    //     $to_email = "calvindon08gmail.com"
+    //     $data = array('name' => "sender name 1", "body" => "test test test");
 
 
-        Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)
-            ->subject("Subject 1");
+    //     Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
+    //         $message->to($to_email, $to_name)
+    //         ->subject("Subject 1");
 
-            $message->from("calvin.wijaya.0000@gmail.com");
-        });
+    //         $message->from("calvin.wijaya.0000@gmail.com");
+    //     });
 
-        return 'Email sent successfully';
-    }
+    //     return 'Email sent successfully';
+    // }
 }

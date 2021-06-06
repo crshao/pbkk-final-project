@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeController;
 
 use App\Mail\MailtrapExample;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,4 +66,7 @@ Route::get('/send-mail', function() {
     Mail::to('newuser@example.com')->send(new MailtrapExample());
 
     return "A message has been sent to mailtrap";
+});
+Route::get("/email", function() {
+    return new WelcomeMail();
 });
