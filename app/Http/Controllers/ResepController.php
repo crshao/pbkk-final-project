@@ -75,7 +75,9 @@ class ResepController extends Controller
     public function show($id)
     {
         $resep = Resep::find($id);
-        return view('resep.lihat', ['reseps' => $resep]);
+        $simpleQR = app()->make('simpleQR');
+        $qr = $simpleQR->generate($id . "/" . $resep->name);
+        return view('resep.lihat', ['reseps' => $resep, 'qr' => $qr]);
     }
 
     /**
@@ -134,5 +136,11 @@ class ResepController extends Controller
         $resep->delete();
 
         return redirect('/resep')->with('success', 'Resep dihapus!');
+    }
+
+    public function qrcode()
+    {
+        $simpleQR = app()->make('simpleQR');
+        echo $simpleQR->generate("Vachri");
     }
 }

@@ -50,6 +50,7 @@ Route::get('/resep/tambah', [ResepController::class, 'create'])->name('resep.cre
 Route::post('/resep/tambah', [ResepController::class, 'store'])->name('resep.store');
 Route::get('/resep/hapus/{id}', [ResepController::class, 'destroy'])->name('resep.destroy');
 Route::get('/resep/lihat/{id}', [ResepController::class, 'show'])->name('resep.show');
+Route::get('/resep/lihat/{id}/qr', [ResepController::class, 'qrcode'])->name('resep.qr');
 Route::get('/resep/edit/{resep}', [ResepController::class, 'edit'])->name('resep.edit');
 Route::post('/resep/edit/{resep}', [ResepController::class, 'update'])->name('resep.update');
 
