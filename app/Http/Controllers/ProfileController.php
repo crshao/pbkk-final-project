@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Profile;
 use App\Models\User;
+use App\Services\EncodingQRService;
 use Illuminate\Http\Request;
+
 
 class ProfileController extends Controller
 {
@@ -48,8 +51,9 @@ class ProfileController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $profile = Profile::where('user_id', $id)->first();
-        return view('profile', compact('user', 'profile'));
+        $profil = Profile::where('user_id', $id)->first();
+        $qrcode = QrCode::size(200)->style('round')->generate("$user->id . $user->name");
+        return view('profile', ['users' => $user, 'profil' => $profil, 'qrcode' => $qrcode]);
     }
 
     /**
