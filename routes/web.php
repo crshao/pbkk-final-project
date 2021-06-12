@@ -8,6 +8,7 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ResepController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 
 use App\Mail\MailtrapExample;
 use Illuminate\Support\Facades\Mail;
@@ -29,6 +30,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::group(array('prefix'=>'user'), function(){
+    Route::get('profile/{id}', [ProfileController::class, 'show']);
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/beranda', [BuyerSellerController::class, 'index']);
