@@ -14,8 +14,10 @@ class CreateBahanbakuResepTable extends Migration
     public function up()
     {
         Schema::create('bahanbaku_resep', function (Blueprint $table) {
-            $table->unsignedInteger('id_bahanbaku');
-            $table->unsignedInteger('id_resep');
+            $table->bigInteger('id_bahanbaku')->unsigned();
+            $table->foreign('id_bahanbaku')->references('id')->on('bahanbakus');
+            $table->bigInteger('id_resep')->unsigned();
+            $table->foreign('id_resep')->references('id')->on('reseps');
             $table->timestamps();
         });
     }
