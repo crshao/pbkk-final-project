@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
+use App\Models\User;
 
 class UserSeeder extends Seeder
 {
@@ -16,6 +18,10 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::factory()->times(50)->create();
+        foreach(Role::all() as $role) {
+            $users = User::inRandomOrder()->take(rand(1, 3))->pluck('id');
+            $role->users()->attach($users);
+        }
 
         // $buyerId = DB::table('users')->insertGetId([
         //     'name' => 'buyer',
