@@ -19,4 +19,9 @@ class Bahanbaku extends Model
         return $this->belongsToMany(Resep::class);
     }
 
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class, 'shopping_carts');
+    }
+
 }
