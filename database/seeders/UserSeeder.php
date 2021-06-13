@@ -15,28 +15,30 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $buyerId = DB::table('users')->insertGetId([
-            'name' => 'buyer',
-            'email' => 'buyer@gmail.com',
-            'password' => Hash::make('buyerPassword'),
-        ]);
+        User::factory()->times(50)->create();
 
-        $sellerId = DB::table('users')->insertGetId([
-            'name' => 'seller',
-            'email' => 'seller@gmail.com',
-            'password' => Hash::make('sellerPassword'),
-        ]);
+        // $buyerId = DB::table('users')->insertGetId([
+        //     'name' => 'buyer',
+        //     'email' => 'buyer@gmail.com',
+        //     'password' => Hash::make('buyerPassword'),
+        // ]);
 
-        //buyer role
-        DB::table('role_user')->insert([
-            'role_id' => 2,
-            'user_id' => $buyerId,
-        ]);
+        // $sellerId = DB::table('users')->insertGetId([
+        //     'name' => 'seller',
+        //     'email' => 'seller@gmail.com',
+        //     'password' => Hash::make('sellerPassword'),
+        // ]);
 
-        //seller role
-        DB::table('role_user')->insert([
-            'role_id' => 3,
-            'user_id' => $sellerId,
-        ]);
+        // //buyer role
+        // DB::table('role_user')->insert([
+        //     'role_id' => 2,
+        //     'user_id' => $buyerId,
+        // ]);
+
+        // //seller role
+        // DB::table('role_user')->insert([
+        //     'role_id' => 3,
+        //     'user_id' => $sellerId,
+        // ]);
     }
 }
