@@ -13,13 +13,13 @@ class BahanbakuRepository
 
     public function findById($id)
     {
-        return Bahanbaku::find($id);
+        return Bahanbaku::findOrFail($id);
     }
 
     public function delete($id)
     {
-        $bahanBaku = Bahanbaku::find($id);
+        $bahanBaku = Bahanbaku::findOrFail($id);
         $bahanBaku->delete();
-        return ;
+        return 204;
     }
 }
