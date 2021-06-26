@@ -6,8 +6,17 @@ use App\Models\Bahanbaku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use App\Repositories\BahanbakuRepository;
+
 class BahanbakuController extends Controller
 {
+    private $bahanbakuRepository;
+
+    public function __construct(BahanbakuRepository $bahanbakuRepository)
+    {
+        $this->bahanbakuRepository = $bahanbakuRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +24,8 @@ class BahanbakuController extends Controller
      */
     public function index()
     {
-        $bahanBakus = Bahanbaku::paginate(6);
-
+        // $bahanBakus = Bahanbaku::paginate(6);
+        $bahanBakus = $this->bahanbakuRepository->all();
         return view('bahanbaku.index', compact('bahanBakus'));
     }
 
@@ -76,7 +85,8 @@ class BahanbakuController extends Controller
      */
     public function show($id)
     {
-        $bahanBaku = Bahanbaku::find($id);
+        // $bahanBaku = Bahanbaku::find($id);
+        $bahanBaku = $this->bahanbakuRepository->findById($id);
         return view('bahanbaku.lihat', ['bahanbakus' => $bahanBaku]);
     }
 

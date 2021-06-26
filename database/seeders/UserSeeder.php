@@ -17,10 +17,17 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->times(50)->create();
-        foreach(Role::all() as $role) {
-            $users = User::inRandomOrder()->take(rand(1, 3))->pluck('id');
-            $role->users()->attach($users);
+        User::factory()->times(10)->create();
+
+        // foreach(Role::all() as $role) {
+        //     $users = User::orderBy('id')->take(rand(1, 3))->pluck('id');
+        //     $role->users()->attach($users);
+        // }
+
+        foreach(User::all() as $user) {
+            $users = User::all()->take(rand(1, 3))->pluck('id');
+            $role = rand(1, 3);
+            $user->roles()->attach($role);
         }
 
         // $buyerId = DB::table('users')->insertGetId([

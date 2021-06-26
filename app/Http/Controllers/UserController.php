@@ -26,9 +26,9 @@ class UserController extends Controller
     public function show()
     {
         $users = DB::table('users')
-            ->join('role_user', 'users.id', '=', 'role_user.id')
+            ->join('role_user', 'users.id', '=', 'role_user.user_id')
             ->get();
-
+            
         return view('user')->with(['users' => $users]);
     }
 }

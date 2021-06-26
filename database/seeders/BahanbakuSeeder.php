@@ -32,7 +32,7 @@ class BahanbakuSeeder extends Seeder
             'pricetag' => "Rp. 3.200 / Ons",
             'price' => 3200,
             'jenis' => "Rempah",
-            'gambar' => "storage/uploads/K1jwGWHOwBSqIm5qhJ48lvJZq9YxS6KS3HSWJpuG.jpg",
+            'gambar' => "storage/uploads/mwKPe4M6sZDSHnAqnraZCHFpleKPZ9FlMYJqTork.jpg",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
