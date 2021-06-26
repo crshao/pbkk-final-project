@@ -43,7 +43,7 @@ class BahanbakuSeeder extends Seeder
             'pricetag' => "Rp. 3.200 / Ons",
             'price' => 3200,
             'jenis' => "Sayur",
-            'gambar' => "storage/uploads/K1jwGWHOwBSqIm5qhJ48lvJZq9YxS6KS3HSWJpuG.jpg",
+            'gambar' => "storage/uploads/Ge6GhG3qFT3HpZ99Oie0ChjAsQrY6LMYjRMLJELQ.jpg",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
@@ -54,7 +54,7 @@ class BahanbakuSeeder extends Seeder
             'pricetag' => "Rp. 3.200 / Ons",
             'price' => 3200,
             'jenis' => "Sayur",
-            'gambar' => "storage/uploads/K1jwGWHOwBSqIm5qhJ48lvJZq9YxS6KS3HSWJpuG.jpg",
+            'gambar' => "storage/uploads/N14tjK56U4hHCFvGSkCDwka02hebCCLbznyeN4IK.jpg",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
@@ -65,7 +65,7 @@ class BahanbakuSeeder extends Seeder
             'pricetag' => "Rp. 3.200 / Ons",
             'price' => 3200,
             'jenis' => "Rempah",
-            'gambar' => "storage/uploads/K1jwGWHOwBSqIm5qhJ48lvJZq9YxS6KS3HSWJpuG.jpg",
+            'gambar' => "storage/uploads/VgyPLAJAlE42oC734wcOW1H9H3aH0FJdvay6UUCZ.jpg",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

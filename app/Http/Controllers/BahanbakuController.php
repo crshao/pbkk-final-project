@@ -129,18 +129,9 @@ class BahanbakuController extends Controller
      */
     public function destroy($id)
     {
-        $bahanbaku = Bahanbaku::find($id);
-
-        //dd($bahanbaku['gambar']);
-
-        // if(Storage::exists('public/'.$bahanbaku['gambar'])){
-        //     Storage::delete('public/'.$bahanbaku['gambar']);
-        // }else{
-        //     dd('File does not exists.');
-        // }
-
-        $bahanbaku->delete();
-
+        // $bahanbaku = Bahanbaku::find($id);
+        // $bahanbaku->delete();
+        $this->bahanbakuRepository->delete($id);
         return redirect('/bahanbaku')->with('success', 'Bahan Baku dihapus');
     }
 }

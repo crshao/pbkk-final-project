@@ -15,4 +15,11 @@ class BahanbakuRepository
     {
         return Bahanbaku::find($id);
     }
+
+    public function delete($id)
+    {
+        $bahanBaku = Bahanbaku::find($id);
+        $bahanBaku->delete();
+        return ;
+    }
 }
