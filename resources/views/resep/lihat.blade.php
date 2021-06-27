@@ -10,10 +10,12 @@
             <div class="row mb-5 mt-5">
                 <div>{{ $qr }}</div>
             </div>
-            <div class="row">
-                <a href="/resep/edit/{{$reseps->id}}" class="btn btn-info">Edit</a>
-                <a href="/resep/hapus/{{$reseps->id}}" class="btn btn-danger">Hapus</a>
-            </div>
+            @if(Auth::user()->hasRole('3'))
+                <div class="row">
+                    <a href="/resep/edit/{{$reseps->id}}" class="btn btn-info">Edit</a>
+                    <a href="/resep/hapus/{{$reseps->id}}" class="btn btn-danger">Hapus</a>
+                </div>
+            @endif
         </div>
     </div>
 </div>
