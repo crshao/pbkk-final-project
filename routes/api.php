@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\BahanbakuController;
 use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\API\ResepController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,13 @@ use App\Http\Controllers\API\RegisterController;
 
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
+
+//Melindungi destroy, hanya untuk user yang ter authentikasi
+Route::resource('resep', ResepController::class)->except(['destroy']);
+
+Route::middleware('auth:sanctum')->group( function() {
+    Route::resource('resep', ResepController::class)->only(['destroy']);
+});
 
 Route::middleware('auth:sanctum')->group( function() {
     Route::resource('bahanbaku', BahanbakuController::class);    
