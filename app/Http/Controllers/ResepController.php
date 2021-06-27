@@ -96,6 +96,9 @@ class ResepController extends Controller
      */
     public function edit(Resep $resep)
     {
+        if (! auth()->user()->hasRole('3')) {
+            abort(401, 'This action is unauthorized.');
+        }
         return view('resep.edit', compact('resep'));
     }
 
@@ -108,6 +111,9 @@ class ResepController extends Controller
      */
     public function update(Request $request, Resep $resep)
     {
+        if (! auth()->user()->hasRole('3')) {
+            abort(401, 'This action is unauthorized.');
+        }
         $data = request()->validate([
             'name' => 'required',
             'description' => 'required',
@@ -127,6 +133,9 @@ class ResepController extends Controller
      */
     public function destroy($id)
     {
+        if (! auth()->user()->hasRole('3')) {
+            abort(401, 'This action is unauthorized.');
+        }
         $this->resepRepository->delete($id);
 
         return redirect('/resep')->with('success', 'Resep dihapus!');
