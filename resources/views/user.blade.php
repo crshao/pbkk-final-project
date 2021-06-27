@@ -9,6 +9,7 @@
                 <thead>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Action</th>
                 </thead>
                 <tbody>
                 @foreach($users as $user)
@@ -16,6 +17,7 @@
                     <tr>
                     <td>{{$user->name}} </td>
                     <td>{{$user->email}} </td>
+                    <td><a href="/user/hapus/{{$user->id}}" class="btn btn-danger">Hapus</a></td>
                     </tr>
                     @endif
                 @endforeach
@@ -26,6 +28,7 @@
                 <thead>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Action</th>
                 </thead>
                 <tbody>
                 @foreach($users as $user)
@@ -33,6 +36,7 @@
                     <tr>
                     <td>{{$user->name}} </td>
                     <td>{{$user->email}} </td>
+                    <td><a href="/user/hapus/{{$user->id}}" class="btn btn-danger">Hapus</a></td>
                     </tr>
                     @endif
                 @endforeach

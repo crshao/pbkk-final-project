@@ -65,6 +65,7 @@ Route::get('/cart/update', [CartController::class, 'update']);
 Route::get('/cart/remove', [CartController::class, 'destroy']);
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'show'])->name('user');
+Route::get('/user/hapus/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.delete');
 
 //Mail
 Route::get('/send/email', [HomeController::class, 'mail']);
