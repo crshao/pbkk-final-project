@@ -6,10 +6,13 @@ use App\Models\Resep;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use App\Repositories\ResepRepository;
+
 class ResepController extends Controller
 {
 
-    public function __construct(){
+    public function __construct(ResepRepository $resepRepository){
+        $this->resepRepository = $resepRepository;
         $this->middleware('auth');
     }
 
@@ -20,7 +23,10 @@ class ResepController extends Controller
      */
     public function index()
     {
-        $reseps = Resep::all();
+        
+        //$reseps = Resep::all();
+        $reseps = $this->resepRepository->all();
+        
         
         return view('resep.index', compact('reseps'));
     }
@@ -74,7 +80,9 @@ class ResepController extends Controller
      */
     public function show($id)
     {
-        $resep = Resep::find($id);
+        //$resep = Resep::find($id);
+        $resep = $this->resepRepository->findById($id);
+
         $simpleQR = app()->make('simpleQR');
         $qr = $simpleQR->generate($id . "/" . $resep->name);
         return view('resep.lihat', ['reseps' => $resep, 'qr' => $qr]);
@@ -119,21 +127,7 @@ class ResepController extends Controller
      */
     public function destroy($id)
     {
-        $resep = Resep::find($id);
-
-        //dd($resep['gambar']);
-
-        if(Storage::exists('public/'.$resep['gambar'])){
-
-            Storage::delete('public/'.$resep['gambar']);
-
-        }else{
-
-            dd('File does not exists.');
-
-        }
-
-        $resep->delete();
+        $this->resepRepository->delete($id);
 
         return redirect('/resep')->with('success', 'Resep dihapus!');
     }
