@@ -46,9 +46,11 @@
         <div class="row">
             <h1>Resep</h1>
         </div>
-        <div class="row">
-            <a class="btn btn-primary" href="/resep/tambah">Tambah Resep</a>
-        </div>
+        @if(Auth::user()->hasRole('3'))
+            <div class="row">
+                <a class="btn btn-primary" href="/resep/tambah">Tambah Resep</a>
+            </div>
+        @endif
         <div class="container">
             <div class="row">
                 @foreach($reseps->chunk(3) as $resepChunk)
