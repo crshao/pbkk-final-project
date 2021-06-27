@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\BahanbakuController;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ResepController;
+use App\Http\Controllers\API\UserController;
 
 /*
 |--------------------------------------------------------------------------
