@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
 
     private $userRepository;
@@ -23,7 +23,7 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->userRepository->roles();
-        return $this->sendResponse($users, 'All Resep retrieved successfully.');
+        return $this->sendResponse($users, 'All Buyer & Seller retrieved successfully.');
     }
 
     /**
@@ -93,9 +93,10 @@ class UserController extends Controller
 
         if($usernow->hasRole('3')){
             $users = $this->userRepository->delete($id);
-            return $this->sendResponse($users, 'Successfully deleted a recipe');
+            return $this->sendResponse($users, 'Successfully deleted a user');
         }else{
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
+            return $this->sendResponse('Cannot Delete a User');
         }
         
     }
