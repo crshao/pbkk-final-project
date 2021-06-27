@@ -27,7 +27,7 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function show()
+    public function index()
     {
         $users = $this->userRepository->roles();       
         return view('user')->with(['users' => $users]);
@@ -36,7 +36,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         $this->userRepository->delete($id);
-
         return redirect('/user')->with('success', 'User dihapus!');
     }
 
