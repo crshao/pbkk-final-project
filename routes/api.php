@@ -26,10 +26,10 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
 //Melindungi destroy, hanya untuk user yang ter authentikasi
-Route::resource('user', ResepController::class)->except(['destroy']);
+Route::resource('user', UserController::class)->except(['destroy']);
 
 Route::middleware('auth:sanctum')->group( function() {
-    Route::resource('user', ResepController::class)->only(['destroy']);
+    Route::resource('user', UserController::class)->only(['destroy']);
 });
 
 
