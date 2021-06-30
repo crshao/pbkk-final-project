@@ -55,13 +55,13 @@
                         </li>
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/home') }}"><span class="fas fa-home"></span>Home</a>
+                            <a class="nav-link" href="{{ url('/home') }}"><span class="fas fa-home"></span> Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/bahanbaku') }}"><span class="fas fa-leaf"></span>Bahan Baku</a>
+                            <a class="nav-link" href="{{ url('/bahanbaku') }}"><span class="fas fa-leaf"></span> Bahan Baku</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/resep') }}"><span class="fas fa-receipt"></span>Resep</a>
+                            <a class="nav-link" href="{{ url('/resep') }}"><span class="fas fa-receipt"></span> Resep</a>
                         </li>
                         @guest
                             @if (Route::has('login'))

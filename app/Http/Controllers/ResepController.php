@@ -129,7 +129,7 @@ class ResepController extends Controller
         ]);
 
         if(count($request->input('bahanbaku')) != count(array_unique($request->input('bahanbaku')))){
-            return redirect('/resep/edit/'.$resep->id)->with('dupe', 'Bahan baku duplicate');;
+            return redirect('/resep/edit/'.$resep->id)->with('dupe', 'Update gagel, Bahan baku duplicate');;
         }
 
         $resep->update([
