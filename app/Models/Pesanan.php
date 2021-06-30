@@ -12,6 +12,6 @@ class Pesanan extends Model
     protected $fillable = ['id_user', 'state', 'id_courier'];
 
     public function couriers() {
-        
+        return $this->belongsTo(Courier::class);
     }
 }

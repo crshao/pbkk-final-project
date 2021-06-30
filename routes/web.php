@@ -85,7 +85,8 @@ Route::get('/add-to-cart/{id}', [CartController::class, 'getAddToCart'])->name('
 Route::get('/reduce/{id}', [CartController::class, 'getReducedByOne'])->name('bahanBaku.reduceByOne');
 Route::get('/remove/{id}', [CartController::class, 'getRemoveFromCart'])->name('bahanBaku.remove');
 Route::get('/shopping-cart', [CartController::class, 'getCart'])->name('bahanBaku.shoppingCart');
-Route::post('/postcheckout', [PesananController::class, ''])
+Route::get('/checkout', [CartController::class, 'getCheckout'])->name('checkout');
+Route::post('/postcheckout', [PesananController::class, 'store'])->name('postcheckout');
 
 // Route::get('/add-to-cart/{id}', [
 //     'uses' => 'CartController@getAddToCart',
