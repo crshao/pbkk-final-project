@@ -39,6 +39,26 @@ class ResepRepository
             ->select('bahanbakus.name', 'bahanbakus.price', 'bahanbakus.jenis', 'bahanbakus.gambar', 'jumlah')
             ->where('reseps.id', '=', $id)
             ->get();
-        return $bahanbaku;
+        if(!$bahanbaku->isEmpty()){
+            return $bahanbaku;
+        }else{
+            throw new \Illuminate\Database\Eloquent\ModelNotFoundException;
+        }
+        
+    }
+
+    public function getTotalHarga($bahanbakus){
+        $total = 0;
+
+        foreach($bahanbakus as $bb){
+            $total = $total + ($bb->price * $bb->jumlah);
+        }
+        
+        return $total;
+        
+    }
+
+    public function getTotalHargaById($id){
+        return $this->getTotalHarga($this->getBahanbaku($id));
     }
 }

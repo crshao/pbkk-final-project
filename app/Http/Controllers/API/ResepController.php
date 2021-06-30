@@ -99,4 +99,9 @@ class ResepController extends BaseController
         }
         
     }
+
+    public function getPriceById($id){
+        $price = $this->resepRepository->getTotalHargaById($id);
+        return $this->sendResponse($price, 'Retrieved total price of recipe with id of '.$id);
+    }
 }
