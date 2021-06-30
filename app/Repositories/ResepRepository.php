@@ -36,7 +36,7 @@ class ResepRepository
         $bahanbaku = DB::table('reseps')
             ->join('bahanbaku_resep', 'reseps.id', '=', 'id_resep')
             ->join('bahanbakus', 'id_bahanbaku', '=', 'bahanbakus.id')
-            ->select('bahanbakus.name', 'bahanbakus.price', 'bahanbakus.jenis', 'bahanbakus.gambar', 'jumlah')
+            ->select('bahanbakus.name', 'bahanbakus.price', 'bahanbakus.jenis', 'bahanbakus.gambar', 'jumlah', 'id_bahanbaku')
             ->where('reseps.id', '=', $id)
             ->get();
         if(!$bahanbaku->isEmpty()){
@@ -60,5 +60,21 @@ class ResepRepository
 
     public function getTotalHargaById($id){
         return $this->getTotalHarga($this->getBahanbaku($id));
+    }
+
+    public function updateResep($id, $bahanbaku, $jumlah){
+        //delete all recipe
+        DB::table('bahanbaku_resep')->where('id_resep', '=', $id)->delete();
+
+        $count = 0;
+        foreach($bahanbaku as $b){
+            DB::table('bahanbaku_resep')->insert([
+                'id_bahanbaku' => $b,
+                'jumlah' => $jumlah[$count],
+                'id_resep' => $id
+            ]);
+            $count = $count + 1;
+        }
+        
     }
 }

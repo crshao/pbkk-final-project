@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 use App\Repositories\ResepRepository;
+use App\Repositories\BahanbakuRepository;
 
 class ResepController extends Controller
 {
 
-    public function __construct(ResepRepository $resepRepository){
+    public function __construct(ResepRepository $resepRepository, BahanbakuRepository $bahanbakuRepository){
         $this->resepRepository = $resepRepository;
+        $this->bahanbakuRepository = $bahanbakuRepository;
         $this->middleware('auth');
     }
 
@@ -102,7 +104,9 @@ class ResepController extends Controller
         if (! auth()->user()->hasRole('3')) {
             abort(401, 'This action is unauthorized.');
         }
-        return view('resep.edit', compact('resep'));
+        $bahanbaku = $this->bahanbakuRepository->list();
+        $br = $this->resepRepository->getBahanbaku($resep->id);
+        return view('resep.edit', ['resep' => $resep, 'bahanbaku' => $bahanbaku, 'br' => $br]);
     }
 
     /**
@@ -114,6 +118,7 @@ class ResepController extends Controller
      */
     public function update(Request $request, Resep $resep)
     {
+        //dd($request->all());
         if (! auth()->user()->hasRole('3')) {
             abort(401, 'This action is unauthorized.');
         }
@@ -123,7 +128,13 @@ class ResepController extends Controller
             'jenis' => 'required',
         ]);
 
-        $resep->update($request->all());
+        $resep->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'jenis' => $request->input('jenis')
+        ]);
+
+        $this->resepRepository->updateResep($resep->id, $request->input('bahanbaku'), $request->input('jumlah'));
 
         return redirect('/resep')->with('success', 'Resep diupdate!');
     }
