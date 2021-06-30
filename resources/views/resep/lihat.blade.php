@@ -7,6 +7,26 @@
             <h1>{{ $reseps->name }}</h1>
             <p>{{$reseps->description}}</p>
             <img class="img-thumbnail" src="/{{ $reseps->gambar }}">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Bahan Baku</th>
+                        <th scope="col">Harga</th>
+                        <th scope="col">Jumlah</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ( $bahanbaku as $bb )
+                        <tr>
+                            <td>{{ $bb->name }}</td>
+                            <td>{{ $bb->price }}</td>
+                            <td>{{ $bb->jumlah }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            
             <div class="row mb-5 mt-5">
                 <div>{{ $qr }}</div>
             </div>
@@ -17,9 +37,7 @@
                 </div>
             @endif
 
-            @foreach ( $bahanbaku as $bb )
-                <ul>{{ $bb->name }} {{ $bb->price }} {{ $bb->jumlah }}</ul>
-            @endforeach
+            
             
         </div>
     </div>
