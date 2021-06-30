@@ -85,7 +85,10 @@ class ResepController extends Controller
 
         $simpleQR = app()->make('simpleQR');
         $qr = $simpleQR->generate($id . "/" . $resep->name);
-        return view('resep.lihat', ['reseps' => $resep, 'qr' => $qr]);
+
+        $bahanbaku = $this->resepRepository->getBahanbaku($id);
+        
+        return view('resep.lihat', ['reseps' => $resep, 'qr' => $qr, 'bahanbaku' => $bahanbaku]);
     }
 
     /**

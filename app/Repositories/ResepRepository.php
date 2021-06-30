@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Resep;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ResepRepository
 {
@@ -23,15 +24,21 @@ class ResepRepository
 
         $var = preg_split("/\//", $resep['gambar'])[2];
 
-        // if(Storage::exists('public/'.$resep['gambar'])){
-        //     Storage::delete('public/'.$resep['gambar']);
-        // }
-
         if(Storage::exists('public/uploads/'.$var)){
             Storage::delete('public/uploads/'.$var);
         }
 
         $resep->delete();
         return 204;
+    }
+
+    public function getBahanbaku($id){
+        $bahanbaku = DB::table('reseps')
+            ->join('bahanbaku_resep', 'reseps.id', '=', 'id_resep')
+            ->join('bahanbakus', 'id_bahanbaku', '=', 'bahanbakus.id')
+            ->select('bahanbakus.name', 'bahanbakus.price', 'bahanbakus.jenis', 'bahanbakus.gambar', 'jumlah')
+            ->where('reseps.id', '=', $id)
+            ->get();
+        return $bahanbaku;
     }
 }

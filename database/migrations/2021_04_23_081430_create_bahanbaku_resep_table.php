@@ -14,8 +14,10 @@ class CreateBahanbakuResepTable extends Migration
     public function up()
     {
         Schema::create('bahanbaku_resep', function (Blueprint $table) {
+            $table->increments('id');
             $table->bigInteger('id_bahanbaku')->unsigned();
             $table->foreign('id_bahanbaku')->references('id')->on('bahanbakus');
+            $table->integer('jumlah');
             $table->bigInteger('id_resep')->unsigned();
             $table->foreign('id_resep')->references('id')->on('reseps');
             $table->timestamps();

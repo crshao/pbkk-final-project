@@ -16,6 +16,11 @@
                     <a href="/resep/hapus/{{$reseps->id}}" class="btn btn-danger">Hapus</a>
                 </div>
             @endif
+
+            @foreach ( $bahanbaku as $bb )
+                <ul>{{ $bb->name }} {{ $bb->price }} {{ $bb->jumlah }}</ul>
+            @endforeach
+            
         </div>
     </div>
 </div>
