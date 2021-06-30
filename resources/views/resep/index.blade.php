@@ -57,7 +57,7 @@
                 <div class="card-deck">
                 @foreach($resepChunk as $resep)
                     <div class="card">
-                        <img class="card-img" width="200" height="200" src="/storage/{{ $resep->gambar }}">
+                        <img class="card-img" width="200" height="200" src="/{{ $resep->gambar }}">
                         <div class="figure-caption">
                         <h3 class="card-title">{{$resep->name}}</h3>
                         <div class="card-subtitle">

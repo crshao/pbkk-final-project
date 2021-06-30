@@ -66,7 +66,7 @@ class ResepController extends Controller
             'name' => $data['name'],
             'description' => $data['description'],
             'jenis' => $data['jenis'],
-            'gambar' => $imagePath,
+            'gambar' => 'storage/' . $imagePath,
         ]);
 
         return redirect('/resep');
