@@ -21,8 +21,14 @@ class ResepRepository
     {
         $resep = Resep::findOrFail($id);
 
-        if(Storage::exists('public/'.$resep['gambar'])){
-            Storage::delete('public/'.$resep['gambar']);
+        $var = preg_split("/\//", $resep['gambar'])[2];
+
+        // if(Storage::exists('public/'.$resep['gambar'])){
+        //     Storage::delete('public/'.$resep['gambar']);
+        // }
+
+        if(Storage::exists('public/uploads/'.$var)){
+            Storage::delete('public/uploads/'.$var);
         }
 
         $resep->delete();
