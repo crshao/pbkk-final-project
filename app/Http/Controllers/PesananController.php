@@ -19,7 +19,7 @@ class PesananController extends Controller
     }
     
     public function store(Request $request){
-        \App\Pesanan::create([
+        Pesanan::create([
             'id_user' => $request->input('id_user'),
             'state' => 1,
             'id_courier' => 1

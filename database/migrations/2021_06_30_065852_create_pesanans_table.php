@@ -15,6 +15,9 @@ class CreatePesanansTable extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
+            $table->integer("id_user");
+            $table->integer("state");
+            $table->integer("id_courier");
             $table->timestamps();
         });
     }

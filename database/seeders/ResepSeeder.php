@@ -16,28 +16,19 @@ class ResepSeeder extends Seeder
     public function run()
     {
         DB::table('reseps')->insert([
-            'name' => "Ayam Goreng",
-            'description' => "Ayam digoreng",
+            'name' => "Ayam Goreng Mentega",
+            'description' => "Ayam digoreng memakai mentega",
             'jenis' => "Gorengan",
-            'gambar' => "storage/uploads/K1jwGWHOwBSqIm5qhJ48lvJZq9YxS6KS3HSWJpuG.jpg",
+            'gambar' => "storage/uploads/EUfkT160WgX6NrwKlJxKE4e4Fo7ZaS5EBdXeDu3W.jpg",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         DB::table('reseps')->insert([
-            'name' => "Mie Ayam",
-            'description' => "Mie Ayam",
+            'name' => "Ikan Asam Manis",
+            'description' => "Ikan asam manis",
             'jenis' => "Kuah",
-            'gambar' => "storage/uploads/K1jwGWHOwBSqIm5qhJ48lvJZq9YxS6KS3HSWJpuG.jpg",
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-
-        DB::table('reseps')->insert([
-            'name' => "Ayam bakar",
-            'description' => "Ayam dibakar",
-            'jenis' => "Bakaran",
-            'gambar' => "storage/uploads/K1jwGWHOwBSqIm5qhJ48lvJZq9YxS6KS3HSWJpuG.jpg",
+            'gambar' => "storage/uploads/D1HwmTV6cywhNTufCzTq3Kw1kfUSa0bDF0R020e2.jpg",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
