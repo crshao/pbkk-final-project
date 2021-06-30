@@ -9,6 +9,7 @@ use App\Http\Controllers\ResepController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PesananController;
 
 use App\Mail\MailtrapExample;
 use Illuminate\Support\Facades\Mail;
@@ -39,7 +40,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/beranda', [BuyerSellerController::class, 'index']);
 
 //Bahan Baku
-Route::get('/bahanbaku', [BahanbakuController::class, 'index']);
+Route::get('/bahanbaku', [BahanbakuController::class, 'index'])->name('bahanbaku');
 Route::get('/bahanbaku/create', [BahanbakuController::class, 'create']);
 Route::post('/bahanbaku', [BahanbakuController::class, 'store']);
 Route::get('/bahanbaku/hapus/{id}', [BahanbakuController::class, 'destroy']);
@@ -77,3 +78,31 @@ Route::get('/send-mail', function() {
 Route::get("/email", function() {
     return new WelcomeMail();
 });
+
+// Cart
+
+Route::get('/add-to-cart/{id}', [CartController::class, 'getAddToCart'])->name('bahanBaku.addToCart');
+Route::get('/reduce/{id}', [CartController::class, 'getReducedByOne'])->name('bahanBaku.reduceByOne');
+Route::get('/remove/{id}', [CartController::class, 'getRemoveFromCart'])->name('bahanBaku.remove');
+Route::get('/shopping-cart', [CartController::class, 'getCart'])->name('bahanBaku.shoppingCart');
+Route::post('/postcheckout', [PesananController::class, ''])
+
+// Route::get('/add-to-cart/{id}', [
+//     'uses' => 'CartController@getAddToCart',
+//     'as' => 'bahanBaku.addToCart'
+// ]);
+
+// Route::get('/reduce/{id}', [
+//     'uses' => 'CartController@getReducedByOne',
+//     'as' => 'bahanBaku.reduceByOne'
+// ]);
+
+// Route::get('/remove/{id}', [
+//     'uses' => 'CartController@getRemoveFromCart',
+//     'as' => 'bahanBaku.remove'
+// ]);
+
+// Route::get('/shopping-cart', [
+//     'uses' => 'CartController@getCart',
+//     'as' => 'bahanBaku.shoppingCart'
+// ]);

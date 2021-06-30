@@ -2,13 +2,77 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
+use App\Cart;
+use App\Models\Bahanbaku;
+// use App\Models\Cart-origin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class CartController extends Controller
 {
+    public function getAddToCart(Request $request, $id){
+        $bahanBaku  = Bahanbaku::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($bahanBaku, $bahanBaku->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect()->route('bahanbaku');
+    }
+
+    public function getCart(){
+        if(!Session::has('cart')){
+            return view('bahanbaku.shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('bahanbaku.shopping-cart', ['bahanBakus' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
+    public function getCheckout(){
+        if(!Session::has('cart')){
+            return view('bahanbaku.shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $total = $cart->totalPrice;
+        return view('bahanbaku.checkout', ['total' => $total]);
+    }
+
+    public function postCheckout(){
+        return view('bahanbaku.postcheckout');
+    }
+
+    public function getReducedByOne($id){
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->reduceByOne($id);
+
+        if(count($cart->items) > 0){
+            Session::put('cart', $cart);
+        } else{
+            Session::forget('cart');
+        }
+        
+        return redirect()->route('bahanBaku.shoppingCart');
+    }
+
+    public function getRemoveFromCart($id){
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->remove($id);
+
+        if(count($cart->items) > 0){
+            Session::put('cart', $cart);
+        } else{
+            Session::forget('cart');
+        }
+
+        return redirect()->route('bahanBaku.shoppingCart');
+    }
+
     /**
      * Display a listing of the resource.
      *

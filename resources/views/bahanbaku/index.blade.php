@@ -22,8 +22,8 @@
               <h3 class="card-title">{{$bahanBaku->name}}</h3>
               <div class="card-subtitle">
                 <h6 class="card-text">{{$bahanBaku->pricetag}}</h6>                
-                <a href="/bahanbaku/lihat/{{ $bahanBaku->id }}" class="btn btn-success" role="button">Lihat</a>
-                {{-- <a href="{{ route('bahanBaku.addToCart', ['id' => $bahanBaku->id]) }}" class="btn btn-success" role="button">Tambah</a> --}}
+                {{-- <a href="/bahanbaku/lihat/{{ $bahanBaku->id }}" class="btn btn-success" role="button">Lihat</a> --}}
+                <a href="{{ route('bahanBaku.addToCart', ['id' => $bahanBaku->id]) }}" class="btn btn-success" role="button">Tambah</a>
               </div> 
             </div>
           </div>
