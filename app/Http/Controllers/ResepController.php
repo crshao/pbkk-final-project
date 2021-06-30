@@ -128,6 +128,10 @@ class ResepController extends Controller
             'jenis' => 'required',
         ]);
 
+        if(count($request->input('bahanbaku')) != count(array_unique($request->input('bahanbaku')))){
+            return redirect('/resep/edit/'.$resep->id)->with('dupe', 'Bahan baku duplicate');;
+        }
+
         $resep->update([
             'name' => $request->input('name'),
             'description' => $request->input('description'),

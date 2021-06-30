@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Resep;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ResepRepository
 {
@@ -71,7 +72,9 @@ class ResepRepository
             DB::table('bahanbaku_resep')->insert([
                 'id_bahanbaku' => $b,
                 'jumlah' => $jumlah[$count],
-                'id_resep' => $id
+                'id_resep' => $id,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
             $count = $count + 1;
         }

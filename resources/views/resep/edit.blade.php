@@ -9,6 +9,13 @@
                     <div class="row">
                         <h1>Edit Resep</h1>
                     </div>
+                    @if(session()->get('dupe'))
+                    <div class="alert alert-danger">
+                        <strong>
+                        {{ session()->get('dupe') }}  
+                        </strong>
+                    </div>
+                    @endif
                     <div class="form row">
                         <label for="name" class="col-md-4 col-form-label">Nama Resep</label>
 
