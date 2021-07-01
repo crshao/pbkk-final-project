@@ -15,6 +15,6 @@ class Resep extends Model
     //Artinya satu resep punya banyak bahan baku
     public function bahanbakus()
     {
-        return $this->hasMany(BahanBaku::class);
+        return $this->hasMany(Bahanbaku::class);
     }
 }

@@ -19,7 +19,7 @@ class CreateBahanbakuResepTable extends Migration
             $table->foreign('id_bahanbaku')->references('id')->on('bahanbakus');
             $table->integer('jumlah');
             $table->bigInteger('id_resep')->unsigned();
-            $table->foreign('id_resep')->references('id')->on('reseps');
+            $table->foreign('id_resep')->references('id')->on('reseps')->onDelete('cascade');
             $table->timestamps();
         });
     }

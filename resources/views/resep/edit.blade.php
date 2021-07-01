@@ -77,7 +77,7 @@
                         <tbody id="bahanList">
                         <!--------------------------->
                         @foreach( $br as $bahan)
-                            <tr>
+                            <tr class="listItem">
                                 <td>
                                     <select  name="bahanbaku[]" class="form-control">
                                         <option value="{{ $bahan->id_bahanbaku}}">{{ $bahan->name }}</option>
@@ -89,12 +89,21 @@
                                 <td>
                                     <input name="jumlah[]" type="number" class="form-control" value="{{ $bahan->jumlah }}">
                                 </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" onclick="deleteRow(this)">
+                                    <i class="fas fa-trash"></i>
+                                     Hapus
+                                    </button>
+                                </td>
                             </tr>
                         @endforeach
                         <!--------------------------->
                         </tbody>
                     </table>        
-                    <a href="#" id="addMore" onclick="add()">Tambah bahan baku</a>
+                    <button type="button" id="addMore" class="btn btn-success" onclick="add()">
+                        <i class="fas fa-plus"></i>
+                         Tambah Bahan Baku
+                    </button>
 
                     <div class="row pt-4">
                         <button class="btn btn-primary">Simpan Resep</button>
@@ -107,28 +116,10 @@
 @endsection
 
 @push('head')
-<!--
-<script id="document-template" type="text/x-handlebars-template">
-    <tr>
-        <td>
-            <select  name="bahanbaku[]" class="form-control">
-                <option>Pilih bahan baku</option>
-                @foreach($bahanbaku as $b)
-                    <option value="{{$b->id}}">{{ $b->name }}</option>
-                @endforeach
-            </select>
-        </td>
-        <td>
-            <input name="jumlah[]" type="number" class="form-control" value="{{ $bahan->jumlah }}">
-        </td>
-    </tr>
- </script>
- -->
-
  <script type="text/javascript">
     function add(){
         var htmlString = `
-        <tr>
+        <tr class="listItem">
             <td>
                 <select  name="bahanbaku[]" class="form-control">
                     <option>Pilih bahan baku</option>
@@ -140,9 +131,20 @@
             <td>
                 <input name="jumlah[]" type="number" class="form-control" value="0">
             </td>
+            <td>
+                <button type="button" class="btn btn-danger" onclick="deleteRow(this)">
+                <i class="fas fa-trash"></i>
+                 Hapus
+                </button>
+            </td>
         </tr>
         `;
         $("#bahanList").append(htmlString);
     }
+
+    function deleteRow(el){
+        el.closest('.listItem').remove();
+    }
+
  </script>
 @endpush

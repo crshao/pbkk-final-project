@@ -57,6 +57,43 @@
 
                     </div>
 
+                    <table class="table my-2">
+                        <thead>
+                            <tr>
+                                <th scope="col">Bahan Baku</th>
+                                <th scope="col">Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bahanList">
+                        <!--------------------------->
+                            <tr class="listItem">
+                                <td>
+                                    <select  name="bahanbaku[]" class="form-control">
+                                        <option>Pilih Bahan baku</option>
+                                        @foreach($bahanbaku as $b)
+                                            <option value="{{$b->id}}">{{ $b->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <input name="jumlah[]" type="number" class="form-control" value="0">
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" onclick="deleteRow(this)">
+                                    <i class="fas fa-trash"></i>
+                                     Hapus
+                                    </button>
+                                </td>
+                            </tr>
+                        <!--------------------------->
+                        </tbody>
+                    </table>    
+                        
+                    <button type="button" id="addMore" class="btn btn-success" onclick="add()">
+                        <i class="fas fa-plus"></i>
+                         Tambah Bahan Baku
+                    </button>
+
                     <div class="row">
                         <label for="gambar" class="col-md-4 col-form-label">Unggah Gambar</label>
                     </div>
@@ -81,3 +118,36 @@
         </form>
     </div>
 @endsection
+
+@push('head')
+ <script type="text/javascript">
+    function add(){
+        var htmlString = `
+        <tr class="listItem">
+            <td>
+                <select  name="bahanbaku[]" class="form-control">
+                    <option>Pilih bahan baku</option>
+                    @foreach($bahanbaku as $b)
+                        <option value="{{$b->id}}">{{ $b->name }}</option>
+                    @endforeach
+                </select>
+            </td>
+            <td>
+                <input name="jumlah[]" type="number" class="form-control" value="0">
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" onclick="deleteRow(this)">
+                <i class="fas fa-trash"></i>
+                 Hapus
+                </button>
+            </td>
+        </tr>
+        `;
+        $("#bahanList").append(htmlString);
+    }
+
+    function deleteRow(el){
+        el.closest('.listItem').remove();
+    }
+ </script>
+@endpush

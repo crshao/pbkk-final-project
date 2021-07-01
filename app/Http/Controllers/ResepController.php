@@ -43,7 +43,8 @@ class ResepController extends Controller
         if (! auth()->user()->hasRole('3')) {
             abort(401, 'This action is unauthorized.');
         }else{
-            return view('resep.tambah');
+            $bahanbaku = $this->bahanbakuRepository->list();
+            return view('resep.tambah', ['bahanbaku' => $bahanbaku]);
         }
     }
 
@@ -55,21 +56,17 @@ class ResepController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $data = request()->validate([
             'name' => 'required',
             'description' => 'required',
             'jenis' => 'required',
-            'gambar' => 'required|image'
+            'gambar' => 'required|image',
+            'bahanbaku' => 'required',
+            'jumlah' => 'required',
         ]);
-
-        $imagePath = $request->gambar->store('uploads', 'public');
-
-        Resep::create([
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'jenis' => $data['jenis'],
-            'gambar' => 'storage/' . $imagePath,
-        ]);
+        
+        $this->resepRepository->createResep($data);
 
         return redirect('/resep');
     }
@@ -129,7 +126,7 @@ class ResepController extends Controller
         ]);
 
         if(count($request->input('bahanbaku')) != count(array_unique($request->input('bahanbaku')))){
-            return redirect('/resep/edit/'.$resep->id)->with('dupe', 'Update gagel, Bahan baku duplicate');;
+            return redirect('/resep/edit/'.$resep->id)->with('dupe', 'Update gagal, Bahan baku duplicate');;
         }
 
         $resep->update([
