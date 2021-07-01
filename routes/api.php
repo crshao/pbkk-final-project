@@ -41,6 +41,8 @@ Route::middleware('auth:sanctum')->group( function() {
     Route::resource('resep', ResepController::class)->only(['destroy']);
 });
 
+Route::get('resep/harga/{id}', [ResepController::class, 'getPriceById']);
+
 Route::middleware('auth:sanctum')->group( function() {
     Route::resource('bahanbaku', BahanbakuController::class);    
 });

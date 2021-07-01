@@ -25,6 +25,7 @@ class BahanbakuResepSeeder extends Seeder
             foreach (range(1,2) as $i) {
                 DB::table('bahanbaku_resep')->insert([
                 'id_bahanbaku' => $faker->randomElement($bahanbakuIds),
+                'jumlah' => $faker->randomDigitNotNull,
                 'id_resep' => $resep->id,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

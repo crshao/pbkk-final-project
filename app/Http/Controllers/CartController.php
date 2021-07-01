@@ -10,8 +10,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Session;
 
+use App\Repositories\ResepRepository;
+
 class CartController extends Controller
 {
+
+    public function __construct(ResepRepository $resepRepository){
+        $this->resepRepository = $resepRepository;
+    }
+
     public function getAddToCart(Request $request, $id){
         $bahanBaku  = Bahanbaku::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -20,6 +27,21 @@ class CartController extends Controller
 
         $request->session()->put('cart', $cart);
         return redirect()->route('bahanbaku');
+    }
+
+    public function getAddToCartQty(Request $request, $id){
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+
+        //insert all the bahanbaku
+        $bahanbakus = $this->resepRepository->getBahanbaku($id);
+        foreach($bahanbakus as $b){
+            $bModel = Bahanbaku::find($b->id_bahanbaku);
+            $cart->addQty($bModel, $b->id_bahanbaku, $b->jumlah);
+        }
+
+        $request->session()->put('cart', $cart);
+        return redirect()->route('resep.index')->with('success', 'Bahanbaku ditambahkan ke cart!');
     }
 
     public function getCart(){

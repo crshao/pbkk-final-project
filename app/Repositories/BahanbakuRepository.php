@@ -11,6 +11,10 @@ class BahanbakuRepository
         return $bahanBakus = Bahanbaku::paginate(6);
     }
 
+    public function list(){
+        return Bahanbaku::all();
+    }
+
     public function findById($id)
     {
         return Bahanbaku::findOrFail($id);

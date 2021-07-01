@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Models\Resep;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ResepRepository
 {
@@ -23,15 +25,59 @@ class ResepRepository
 
         $var = preg_split("/\//", $resep['gambar'])[2];
 
-        // if(Storage::exists('public/'.$resep['gambar'])){
-        //     Storage::delete('public/'.$resep['gambar']);
-        // }
-
         if(Storage::exists('public/uploads/'.$var)){
             Storage::delete('public/uploads/'.$var);
         }
 
         $resep->delete();
         return 204;
+    }
+
+    public function getBahanbaku($id){
+        $bahanbaku = DB::table('reseps')
+            ->join('bahanbaku_resep', 'reseps.id', '=', 'id_resep')
+            ->join('bahanbakus', 'id_bahanbaku', '=', 'bahanbakus.id')
+            ->select('bahanbakus.name', 'bahanbakus.price', 'bahanbakus.jenis', 'bahanbakus.gambar', 'jumlah', 'id_bahanbaku')
+            ->where('reseps.id', '=', $id)
+            ->get();
+        if(!$bahanbaku->isEmpty()){
+            return $bahanbaku;
+        }else{
+            throw new \Illuminate\Database\Eloquent\ModelNotFoundException;
+        }
+        
+    }
+
+    public function getTotalHarga($bahanbakus){
+        $total = 0;
+
+        foreach($bahanbakus as $bb){
+            $total = $total + ($bb->price * $bb->jumlah);
+        }
+        
+        return $total;
+        
+    }
+
+    public function getTotalHargaById($id){
+        return $this->getTotalHarga($this->getBahanbaku($id));
+    }
+
+    public function updateResep($id, $bahanbaku, $jumlah){
+        //delete all recipe
+        DB::table('bahanbaku_resep')->where('id_resep', '=', $id)->delete();
+
+        $count = 0;
+        foreach($bahanbaku as $b){
+            DB::table('bahanbaku_resep')->insert([
+                'id_bahanbaku' => $b,
+                'jumlah' => $jumlah[$count],
+                'id_resep' => $id,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+            $count = $count + 1;
+        }
+        
     }
 }

@@ -1,68 +1,58 @@
-<!-- <html>
-    <head>
-        <title>Resep</title>
-    </head>
-    <body>
-        <div class="col-sm-12">  
-            @if(session()->get('success'))
-            <div class="alert alert-success">
-              {{ session()->get('success') }}  
-            </div>
-            @endif
-        </div>
-        <a href="/resep/tambah">tambah resep</a>
-        <table>
-            <tr>
-                <td>nama</td>
-                <td>desk</td>
-                <td>jenis</td>
-            </tr>
-            @foreach($reseps as $resep)
-            <tr>
-                <td>{{ $resep->name }}</td>
-                <td>{{ $resep->description }}</td>
-                <td>{{ $resep->jenis }}</td>
-                <td> <a href="#">edit</a></td>
-                <td> <a href="/resep/hapus/{{$resep->id}}">delete</a></td>
-            </tr>
-            @endforeach
-        </table>
-    </body>
-    
-</html>
--->
-
 @extends('layouts.app')
 
+@section('title')
+    Resep
+@endsection
+
+{{-- Untuk menghilangkan tanda panah besar --}}
+<style>
+  .w-5 {
+    display: none
+  }
+</style>
+
 @section('content')
-    <div class="col-sm-12">  
-        @if(session()->get('success'))
-        <div class="alert alert-success">
-        {{ session()->get('success') }}  
-        </div>
-        @endif
-    </div>
     <div class="container">
         <div class="row">
-            <h1>Resep</h1>
+            <div class="col-sm-12">  
+                @if(session()->get('success'))
+                <div class="alert alert-success">
+                {{ session()->get('success') }}  
+                </div>
+                @endif
+            </div>
         </div>
+        
+        <div class="row">
+            <div class="col">
+                <h1>Resep</h1>
+            </div>
+        </div>
+
         @if(Auth::user()->hasRole('3'))
             <div class="row">
-                <a class="btn btn-primary" href="/resep/tambah">Tambah Resep</a>
+                <div class="col">
+                    <a class="btn btn-primary" href="/resep/tambah">Tambah Resep</a>
+                </div>
             </div>
         @endif
-        <div class="container">
-            <div class="row">
+
+        
+        <div class="row">
+            <div class="col">
                 @foreach($reseps->chunk(3) as $resepChunk)
                 <div class="card-deck">
                 @foreach($resepChunk as $resep)
-                    <div class="card">
-                        <img class="card-img" width="200" height="200" src="/{{ $resep->gambar }}">
-                        <div class="figure-caption">
-                        <h3 class="card-title">{{$resep->name}}</h3>
-                        <div class="card-subtitle">
-                            <a href="/resep/lihat/{{ $resep->id }}" class="btn btn-success" role="button">Lihat</a>
-                        </div>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="card my-2">
+                            <img class="card-img" width="200" height="200" src="/{{ $resep->gambar }}">
+                            <div class="figure-caption">
+                                <h3 class="card-title px-2 py-2">{{$resep->name}}</h3>
+                                <div class="card-subtitle">
+                                    <a href="/resep/lihat/{{ $resep->id }}" class="btn btn-success mx-2 my-2" role="button">Lihat</a>
+                                    <a href="{{ route('resep.addToCart', ['id' => $resep->id]) }}" class="btn btn-success my-2" role="button">Tambah Ke Cart</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -70,5 +60,13 @@
                 @endforeach
             </div>
         </div>
+
+        <div class="row">
+            <div class="col">
+                {{ $reseps->links() }}
+            </div>
+        </div>
+        
     </div>
+    
 @endsection
