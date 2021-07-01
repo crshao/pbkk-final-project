@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bahanbaku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 use App\Repositories\BahanbakuRepository;
 
@@ -26,7 +27,8 @@ class BahanbakuController extends Controller
     {
         // $bahanBakus = Bahanbaku::paginate(6);
         $bahanBakus = $this->bahanbakuRepository->all();
-        return view('bahanbaku.index', compact('bahanBakus'));
+        $filteredBahan = $this->bahanbakuRepository->filter();
+        return view('bahanbaku.index', compact('bahanBakus', 'filteredBahan'));
     }
 
     /**
@@ -64,6 +66,7 @@ class BahanbakuController extends Controller
         ]);
 
         $imagePath = request('gambar')->store('uploads', 'public');
+        $user = Auth::User();
 
         BahanBaku::create([
             'name' => $data['name'],
@@ -72,6 +75,7 @@ class BahanbakuController extends Controller
             'price' => $data['price'],
             'pricetag' => "Rp." . strval($data['price']) . "/Ons",
             'gambar' => 'storage/' . $imagePath,
+            'user_id' => $user->id,
         ]);
 
         return redirect('/bahanbaku/');
