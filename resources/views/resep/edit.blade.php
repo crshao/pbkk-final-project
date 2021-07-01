@@ -74,9 +74,9 @@
                     <table class="table my-2">
                         <thead>
                             <tr>
-                                <th scope="col">Bahan Baku</th>
-                                <th scope="col">Jumlah</th>
-                                <th scope="col"></th>
+                                <th scope="col" class="col-6">Bahan Baku</th>
+                                <th scope="col" class="col-4">Jumlah</th>
+                                <th scope="col" class="col-2"></th>
                             </tr>
                         </thead>
                         <tbody id="bahanList">
@@ -123,6 +123,9 @@
 
                     <div class="row pt-4">
                         <button class="btn btn-primary">Simpan Resep</button>
+                        <a 
+                        class="btn btn-danger mx-2" 
+                        href="{{ route('resep.show', ['id' => $resep->id]) }}">Kembali</a>
                     </div>
                 </div>
             </div>
