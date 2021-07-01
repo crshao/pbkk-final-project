@@ -52,7 +52,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('bahanBaku.shoppingCart')}}">
-                                Shopping Cart
+                                <span class="fas fa-shopping-cart"></span> Shopping Cart
                                 <span>
                                     {{Session::has('cart') ? Session::get('cart')->totalQuantity : ''}}
                                 </span>

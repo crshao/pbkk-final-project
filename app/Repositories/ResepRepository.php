@@ -29,9 +29,6 @@ class ResepRepository
             Storage::delete('public/uploads/'.$var);
         }
 
-        // DB::table('reseps')
-        // ->where('reseps.id', '=', $id)->delete();
-
         $resep->delete();
         return 204;
     }

@@ -78,11 +78,21 @@
                                 <td>
                                     <input name="jumlah[]" type="number" class="form-control" value="0">
                                 </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" onclick="deleteRow(this)">
+                                    <i class="fas fa-trash"></i>
+                                     Hapus
+                                    </button>
+                                </td>
                             </tr>
                         <!--------------------------->
                         </tbody>
-                    </table>        
-                    <a href="#" id="addMore" onclick="add()">Tambah bahan baku</a>
+                    </table>    
+                        
+                    <button type="button" id="addMore" class="btn btn-success" onclick="add()">
+                        <i class="fas fa-plus"></i>
+                         Tambah Bahan Baku
+                    </button>
 
                     <div class="row">
                         <label for="gambar" class="col-md-4 col-form-label">Unggah Gambar</label>
@@ -125,9 +135,19 @@
             <td>
                 <input name="jumlah[]" type="number" class="form-control" value="0">
             </td>
+            <td>
+                <button type="button" class="btn btn-danger" onclick="deleteRow(this)">
+                <i class="fas fa-trash"></i>
+                 Hapus
+                </button>
+            </td>
         </tr>
         `;
         $("#bahanList").append(htmlString);
+    }
+
+    function deleteRow(el){
+        el.closest('.listItem').remove();
     }
  </script>
 @endpush
