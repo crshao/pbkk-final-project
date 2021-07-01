@@ -62,7 +62,7 @@
     @elseif(Auth::user()->hasRole('2'))
         <div class="row">
             <div class="col">
-                <a href="#" class="btn btn-success mx-2">Tambah ke Keranjang</a>
+                <a href="{{ route('resep.addToCart', ['id' => $reseps->id]) }}" class="btn btn-success mx-2">Tambah ke Keranjang</a>
             </div>
         </div>
     @endif

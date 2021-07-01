@@ -31,6 +31,21 @@ class Cart
         $this->totalPrice += $price;
     }
 
+    public function addQty($item, $id, $jumlah){
+        $price = intval($item->price);
+        $storedItem = ['quantity' => 0, 'price' => $price, 'item' => $item];
+        if($this->items){
+            if(array_key_exists($id, $this->items)){
+                $storedItem = $this->items[$id];
+            }
+        }
+        $storedItem['quantity'] += $jumlah;
+        $storedItem['price'] = ($price) * $storedItem['quantity'];
+        $this->items[$id] = $storedItem;
+        $this->totalQuantity += $jumlah;
+        $this->totalPrice += $price * $jumlah;
+    }
+
     public function reduceByOne($id){
         $this->items[$id]['quantity']--;
         $this->items[$id]['price'] -= $this->items[$id]['item']['price'];

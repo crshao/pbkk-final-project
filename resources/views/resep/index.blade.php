@@ -50,6 +50,7 @@
                                 <h3 class="card-title px-2 py-2">{{$resep->name}}</h3>
                                 <div class="card-subtitle">
                                     <a href="/resep/lihat/{{ $resep->id }}" class="btn btn-success mx-2 my-2" role="button">Lihat</a>
+                                    <a href="{{ route('resep.addToCart', ['id' => $resep->id]) }}" class="btn btn-success my-2" role="button">Tambah Ke Cart</a>
                                 </div>
                             </div>
                         </div>
