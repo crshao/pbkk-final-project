@@ -89,6 +89,7 @@ Route::get('/checkout', [CartController::class, 'getCheckout'])->name('checkout'
 Route::post('/postcheckout', [PesananController::class, 'store'])->name('postcheckout');
 
 Route::get('/add-to-cart-qty/{id}', [CartController::class, 'getAddToCartQty'])->name('resep.addToCart');
+Route::get('/profile', [PesananController::class, 'index'])->name('profile');
 
 // Route::get('/add-to-cart/{id}', [
 //     'uses' => 'CartController@getAddToCart',

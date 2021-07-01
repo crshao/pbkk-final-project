@@ -63,6 +63,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/resep') }}"><span class="fas fa-receipt"></span> Resep</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/profile') }}"><span class="fas fa-receipt"></span> Detail Pesanan</a>
+                        </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
