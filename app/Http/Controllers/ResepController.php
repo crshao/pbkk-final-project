@@ -25,10 +25,7 @@ class ResepController extends Controller
      */
     public function index()
     {
-        
-        //$reseps = Resep::all();
         $reseps = $this->resepRepository->all();
-        
         
         return view('resep.index', compact('reseps'));
     }
@@ -56,7 +53,6 @@ class ResepController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $data = request()->validate([
             'name' => 'required',
             'description' => 'required',
@@ -135,13 +131,14 @@ class ResepController extends Controller
             return redirect('/resep/edit/'.$resep->id)->with('dupe', 'Update gagal, Bahan baku duplicate');;
         }
 
-        $resep->update([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'jenis' => $request->input('jenis')
-        ]);
+        // $resep->update([
+        //     'name' => $request->input('name'),
+        //     'description' => $request->input('description'),
+        //     'jenis' => $request->input('jenis')
+        // ]);
+        $this->resepRepository->updateResep($resep, $request->all());
 
-        $this->resepRepository->updateResep($resep->id, $request->input('bahanbaku'), $request->input('jumlah'));
+        //$this->resepRepository->updateResep($resep->id, $request->input('bahanbaku'), $request->input('jumlah'));
 
         return redirect('/resep')->with('success', 'Resep diupdate!');
     }
