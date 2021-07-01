@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        
         User::factory()->times(10)->create();
 
         // foreach(Role::all() as $role) {
@@ -53,5 +54,6 @@ class UserSeeder extends Seeder
             'role_id' => 3,
             'user_id' => $sellerId,
         ]);
+        
     }
 }

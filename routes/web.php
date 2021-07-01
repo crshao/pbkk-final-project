@@ -33,6 +33,10 @@ Route::group(array('prefix'=>'user'), function(){
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', function () {
+    return redirect('/');
+});
+
 Route::get('/beranda', [BuyerSellerController::class, 'index']);
 
 //Bahan Baku
