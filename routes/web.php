@@ -26,17 +26,13 @@ use App\Mail\WelcomeMail;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::group(array('prefix'=>'user'), function(){
     Route::get('profile/{id}', [ProfileController::class, 'show']);
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/beranda', [BuyerSellerController::class, 'index']);
 
 //Bahan Baku

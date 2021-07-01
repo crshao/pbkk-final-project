@@ -32,7 +32,7 @@
         @if(Auth::user()->hasRole('3'))
             <div class="row">
                 <div class="col">
-                    <a class="btn btn-primary" href="/resep/tambah">Tambah Resep</a>
+                    <a class="btn btn-success" href="/resep/tambah">Tambah Resep</a>
                 </div>
             </div>
         @endif

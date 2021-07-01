@@ -22,6 +22,8 @@ class CreateBahanbakusTable extends Migration
             $table->integer('price');
             $table->string('jenis');
             $table->string('gambar')->nullable();
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -50,26 +50,15 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('bahanBaku.shoppingCart')}}">
-                                <span class="fas fa-shopping-cart"></span> Shopping Cart
-                                <span>
-                                    {{Session::has('cart') ? Session::get('cart')->totalQuantity : ''}}
-                                </span>
-                            </a>
-                        </li>
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/home') }}"><span class="fas fa-home"></span> Home</a>
+                            <a class="nav-link" href="{{ url('/') }}"><span class="fas fa-home"></span> Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/bahanbaku') }}"><span class="fas fa-leaf"></span> Bahan Baku</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/resep') }}"><span class="fas fa-receipt"></span> Resep</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/profile') }}"><span class="fas fa-receipt"></span> Detail Pesanan</a>
                         </li>
                         @guest
                             @if (Route::has('login'))
@@ -84,6 +73,19 @@
                                 </li>
                             @endif
                         @else
+                            @if (Auth::user()->hasRole(2))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/profile') }}"><span class="fas fa-receipt"></span> Detail Pesanan</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('bahanBaku.shoppingCart')}}">
+                                        <span class="fas fa-shopping-cart"></span> Shopping Cart
+                                        <span style="fontWeight:Bold;color:white;">
+                                            {{Session::has('cart') ? Session::get('cart')->totalQuantity : ''}}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
