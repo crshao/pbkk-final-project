@@ -63,16 +63,24 @@ class ResepRepository
         return $this->getTotalHarga($this->getBahanbaku($id));
     }
 
-    public function updateResep($id, $bahanbaku, $jumlah){
-        //delete all recipe
-        DB::table('bahanbaku_resep')->where('id_resep', '=', $id)->delete();
+    public function updateResep($resep, $data){
+        //dd($data['bahanbaku']);
+
+        $resep->update([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'jenis' => $data['jenis']
+        ]);
+
+        //delete all recipe in pivot
+        DB::table('bahanbaku_resep')->where('id_resep', '=', $resep->id)->delete();
 
         $count = 0;
-        foreach($bahanbaku as $b){
+        foreach($data['bahanbaku'] as $b){
             DB::table('bahanbaku_resep')->insert([
                 'id_bahanbaku' => $b,
-                'jumlah' => $jumlah[$count],
-                'id_resep' => $id,
+                'jumlah' => $data['jumlah'][$count],
+                'id_resep' => $resep->id,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
