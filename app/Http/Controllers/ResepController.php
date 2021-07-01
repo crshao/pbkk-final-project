@@ -131,16 +131,9 @@ class ResepController extends Controller
             return redirect('/resep/edit/'.$resep->id)->with('dupe', 'Update gagal, Bahan baku duplicate');;
         }
 
-        // $resep->update([
-        //     'name' => $request->input('name'),
-        //     'description' => $request->input('description'),
-        //     'jenis' => $request->input('jenis')
-        // ]);
         $this->resepRepository->updateResep($resep, $request->all());
 
-        //$this->resepRepository->updateResep($resep->id, $request->input('bahanbaku'), $request->input('jumlah'));
-
-        return redirect('/resep')->with('success', 'Resep diupdate!');
+        return redirect('/resep')->with('success', 'Resep '.$resep->name.' berhasil di update!');
     }
 
     /**

@@ -6,6 +6,16 @@
             @csrf
             <div class="row">
                 <div class="col-8">
+                <!--
+                @if(old('bahanbaku'))
+                {{count(old('bahanbaku'))}}
+                @endif
+                @if(old('bahanbaku'))
+                    @for( $i =0; $i < count(old('bahanbaku')); $i++)                            
+                    {{ old('bahanbaku.'.$i)}}                                     
+                    @endfor
+                @endif
+                -->
                     <div class="row">
                         <h1>Tambah Resep</h1>
                     </div>
@@ -66,6 +76,37 @@
                             </tr>
                         </thead>
                         <tbody id="bahanList">
+
+                        <!-- Jika ada error -->
+                        @if(old('bahanbaku'))
+                            @for( $i =0; $i < count(old('bahanbaku')); $i++)  
+
+                            <tr class="listItem">
+                                <td>
+                                    <select name="bahanbaku[]" class="form-control">
+                                        <option value="">Pilih Bahan baku</option>
+                                        @foreach($bahanbaku as $b)
+                                            @if( old('bahanbaku.'.$i) == $b->id)
+                                            <option value="{{$b->id}}" selected>{{ $b->name }}</option>
+                                            @else
+                                            <option value="{{$b->id}}">{{ $b->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <input name="jumlah[]" type="number" class="form-control" value="{{ old('jumlah.'.$i)}}">
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" onclick="deleteRow(this)">
+                                    <i class="fas fa-trash"></i>
+                                     Hapus
+                                    </button>
+                                </td>
+                            </tr>                                 
+                            @endfor
+                        @else
+
                         <!--------------------------->
                             <tr class="listItem">
                                 <td>
@@ -87,6 +128,8 @@
                                 </td>
                             </tr>
                         <!--------------------------->
+                        @endif
+
                         </tbody>
                     </table>    
                         
@@ -101,7 +144,7 @@
                             Bahan baku tidak boleh kosong
                         </div>
                     @elseif($errors->has('jumlah.*'))
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger my-2">
                             Jumlah tidak boleh 0
                         </div>
                     @endif
