@@ -107,24 +107,6 @@
 @endsection
 
 @push('head')
-<!--
-<script id="document-template" type="text/x-handlebars-template">
-    <tr>
-        <td>
-            <select  name="bahanbaku[]" class="form-control">
-                <option>Pilih bahan baku</option>
-                @foreach($bahanbaku as $b)
-                    <option value="{{$b->id}}">{{ $b->name }}</option>
-                @endforeach
-            </select>
-        </td>
-        <td>
-            <input name="jumlah[]" type="number" class="form-control" value="{{ $bahan->jumlah }}">
-        </td>
-    </tr>
- </script>
- -->
-
  <script type="text/javascript">
     function add(){
         var htmlString = `

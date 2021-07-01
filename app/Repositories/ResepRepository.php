@@ -29,6 +29,9 @@ class ResepRepository
             Storage::delete('public/uploads/'.$var);
         }
 
+        // DB::table('reseps')
+        // ->where('reseps.id', '=', $id)->delete();
+
         $resep->delete();
         return 204;
     }
@@ -79,5 +82,31 @@ class ResepRepository
             $count = $count + 1;
         }
         
+    }
+
+    public function createResep($data){
+        //dd($data);
+        $imagePath = $data['gambar']->store('uploads', 'public');
+
+        //Buat resep baru di tabel resep
+        $resepBaru = Resep::create([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'jenis' => $data['jenis'],
+            'gambar' => 'storage/' . $imagePath,
+        ]);
+
+        //masukkan relasi ke dalam pivot
+        $count = 0;
+        foreach($data['bahanbaku'] as $b){
+            DB::table('bahanbaku_resep')->insert([
+                'id_bahanbaku' => $b,
+                'jumlah' => $data['jumlah'][$count],
+                'id_resep' => $resepBaru->id,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+            $count = $count + 1;
+        }
     }
 }
