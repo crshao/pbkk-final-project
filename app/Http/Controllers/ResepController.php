@@ -62,10 +62,14 @@ class ResepController extends Controller
             'description' => 'required',
             'jenis' => 'required',
             'gambar' => 'required|image',
-            'bahanbaku' => 'required',
-            'jumlah' => 'required',
+            'bahanbaku.*' => 'required',
+            'jumlah.*' => 'required|numeric|gt:0',
         ]);
         
+        if(count($request->input('bahanbaku')) != count(array_unique($request->input('bahanbaku')))){
+            return redirect('/resep/tambah')->with('dupe', 'Tambah gagal, Bahan baku duplicate');;
+        }
+
         $this->resepRepository->createResep($data);
 
         return redirect('/resep');
@@ -123,6 +127,8 @@ class ResepController extends Controller
             'name' => 'required',
             'description' => 'required',
             'jenis' => 'required',
+            'bahanbaku.*' => 'required',
+            'jumlah.*' => 'required|numeric|gt:0',
         ]);
 
         if(count($request->input('bahanbaku')) != count(array_unique($request->input('bahanbaku')))){

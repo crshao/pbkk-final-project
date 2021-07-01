@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Edit Resep
+@endsection
+
 @section('content')
     <div class="container">
         <form action="/resep/edit/{{ $resep->id }}" enctype="multipart/form-data" method="post">
@@ -72,6 +76,7 @@
                             <tr>
                                 <th scope="col">Bahan Baku</th>
                                 <th scope="col">Jumlah</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody id="bahanList">
@@ -100,10 +105,21 @@
                         <!--------------------------->
                         </tbody>
                     </table>        
+                    
                     <button type="button" id="addMore" class="btn btn-success" onclick="add()">
                         <i class="fas fa-plus"></i>
                          Tambah Bahan Baku
                     </button>
+
+                    @if ($errors->has('bahanbaku.*'))
+                        <div class="alert alert-danger my-2">
+                            Bahan baku tidak boleh kosong
+                        </div>
+                    @elseif($errors->has('jumlah.*'))
+                        <div class="alert alert-danger">
+                            Jumlah tidak boleh 0
+                        </div>
+                    @endif
 
                     <div class="row pt-4">
                         <button class="btn btn-primary">Simpan Resep</button>
@@ -122,7 +138,7 @@
         <tr class="listItem">
             <td>
                 <select  name="bahanbaku[]" class="form-control">
-                    <option>Pilih bahan baku</option>
+                    <option value="">Pilih bahan baku</option>
                     @foreach($bahanbaku as $b)
                         <option value="{{$b->id}}">{{ $b->name }}</option>
                     @endforeach
